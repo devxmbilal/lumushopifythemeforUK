@@ -24,7 +24,7 @@
         "announcement-bar-1": {
           "type": "announcement",
           "settings": {
-            "text": "🔒 100% Secure Checkout | Easy 30-Day Returns",
+            "text": "🔒 100% Secure Checkout",
             "link": ""
           }
         },
