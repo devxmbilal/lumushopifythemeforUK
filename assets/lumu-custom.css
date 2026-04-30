@@ -3324,6 +3324,23 @@ details[open].menu-opening~.header__heading~.header__inline-menu~.header__icons,
 summary.header__menu-item {
   display: flex !important;
   align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+summary.header__menu-item .icon-caret {
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  margin-top: 2px;
+}
+details[open] > summary.header__menu-item .icon-caret {
+  transform: rotate(180deg) !important;
+}
+
+summary.header__menu-item {
+  display: flex !important;
+  align-items: center !important;
   justify-content: flex-start !important;
   gap: 4px;
 }
