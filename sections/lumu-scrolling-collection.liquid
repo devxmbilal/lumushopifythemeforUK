@@ -60,11 +60,29 @@
   @media screen and (max-width: 749px) {
     .lumu-marquee-product-card {
       width: 240px;
+      scroll-snap-align: start;
+    }
+    .lumu-collection-marquee-wrapper {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .lumu-collection-marquee-wrapper::-webkit-scrollbar {
+      display: none;
     }
     .lumu-collection-marquee-track {
+      animation: none !important;
       gap: 15px;
       padding-left: 15px;
-      animation-duration: 30s;
+      padding-right: 15px;
+    }
+    .lumu-collection-marquee-track:nth-child(2) {
+      display: none;
     }
   }
 {%- endstyle -%}
