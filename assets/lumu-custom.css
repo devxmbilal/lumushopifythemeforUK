@@ -3320,3 +3320,13 @@ details[open].menu-opening~.header__heading~.header__inline-menu~.header__icons,
 .menu-drawer__inner-container {
   height: auto !important;
 }
+/* Fix header menu item arrow placement */
+summary.header__menu-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px;
+}
+summary.header__menu-item span {
+  display: inline-block;
+}
