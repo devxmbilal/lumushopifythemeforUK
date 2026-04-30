@@ -157,7 +157,7 @@
     "lumu_trending_viral": {
       "type": "featured-collection",
       "settings": {
-        "collection": "trending-viral-finds",
+        "collection": "best-sales",
         "products_to_show": 4,
         "title": "Trending & Viral Finds",
         "heading_size": "h2",
