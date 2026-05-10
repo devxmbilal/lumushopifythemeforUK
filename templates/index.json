@@ -45,7 +45,7 @@
     "lumu_tech_gadgets": {
       "type": "featured-collection",
       "settings": {
-        "collection": "tech-samrt-gadget",
+        "collection": "tech-smart-gadgets",
         "products_to_show": 4,
         "title": "Tech & Smart Gadgets",
         "heading_size": "h2",
