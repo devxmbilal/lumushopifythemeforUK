@@ -73,7 +73,7 @@
     "lumu_home_kitchen": {
       "type": "featured-collection",
       "settings": {
-        "collection": "home-kitchen-essentails",
+        "collection": "home-kitchen-essentials",
         "products_to_show": 4,
         "title": "Home & Kitchen Essentials",
         "heading_size": "h2",
