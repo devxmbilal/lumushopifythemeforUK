@@ -192,16 +192,7 @@
                   {%- endif -%}
                 </p>
               {%- when 'description' -%}
-                {%- if product.description != blank -%}
-                  <div class="product__description rte" style="font-size: 1.6rem; color: var(--lumu-text-light); line-height: 1.6;" {{ block.shopify_attributes }}>
-                    {{ product.description }}
-                  </div>
-                {%- else -%}
-                   <!-- Fallback if no description exists -->
-                  <div class="product__description rte" style="font-size: 1.6rem; color: var(--lumu-text-light); line-height: 1.6;" {{ block.shopify_attributes }}>
-                    <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
-                  </div>
-                {%- endif -%}
+                <!-- Description moved to tabs section below -->
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -491,24 +482,33 @@
                   show_pickup_availability: true
                 -%}
               {%- when 'trust_badges' -%}
-                <div class="product-trust-badges" {{ block.shopify_attributes }}>
-                  <div class="trust-badge">
+                <div class="product-trust-badges-container" {{ block.shopify_attributes }}>
+                  <div class="trust-badge-box">
                     <span class="svg-wrapper">
                       {{- 'icon-success.svg' | inline_asset_content -}}
                     </span>
-                    <span>100% Original</span>
+                    <div class="trust-badge-text">
+                      <span class="trust-badge-title">100% Original</span>
+                      <span class="trust-badge-subtitle">Guaranteed</span>
+                    </div>
                   </div>
-                  <div class="trust-badge">
-                    <span class="svg-wrapper">
-                      {{- 'icon-return.svg' | inline_asset_content -}}
-                    </span>
-                    <span>7 Day Returns</span>
-                  </div>
-                  <div class="trust-badge">
+                  <div class="trust-badge-box">
                     <span class="svg-wrapper">
                       {{- 'icon-truck.svg' | inline_asset_content -}}
                     </span>
-                    <span>Fast Delivery</span>
+                    <div class="trust-badge-text">
+                      <span class="trust-badge-title">Fast Delivery</span>
+                      <span class="trust-badge-subtitle">Tracked</span>
+                    </div>
+                  </div>
+                  <div class="trust-badge-box">
+                    <span class="svg-wrapper">
+                      {{- 'icon-return.svg' | inline_asset_content -}}
+                    </span>
+                    <div class="trust-badge-text">
+                      <span class="trust-badge-title">7 Day Returns</span>
+                      <span class="trust-badge-subtitle">Easy policy</span>
+                    </div>
                   </div>
                 </div>
               {%- when 'lumu_urgency' -%}
@@ -728,6 +728,45 @@
         </section>
       </div>
     </div>
+
+    <div class="product-tabs-container">
+      <div class="product-tabs-header">
+        <button class="product-tab-btn active" data-tab="tab-description">Description</button>
+        <button class="product-tab-btn" data-tab="tab-specifications">Specifications</button>
+        <button class="product-tab-btn" data-tab="tab-reviews">Reviews (0)</button>
+      </div>
+      <div class="product-tabs-content">
+        <div id="tab-description" class="product-tab-panel active rte">
+          {%- if product.description != blank -%}
+            {{ product.description }}
+          {%- else -%}
+            <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
+          {%- endif -%}
+        </div>
+        <div id="tab-specifications" class="product-tab-panel rte">
+          <p>No specifications available.</p>
+        </div>
+        <div id="tab-reviews" class="product-tab-panel rte">
+          <p>No reviews yet.</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabBtns = document.querySelectorAll('.product-tab-btn');
+        const tabPanels = document.querySelectorAll('.product-tab-panel');
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanels.forEach(p => p.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+          });
+        });
+      });
+    </script>
 
     {% render 'product-media-modal', variant_images: variant_images %}
 

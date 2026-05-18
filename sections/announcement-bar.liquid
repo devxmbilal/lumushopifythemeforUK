@@ -33,7 +33,7 @@
           {{ section.blocks.first.shopify_attributes }}
         >
           <p class="announcement-bar__message h5">
-            <span>🚚 Free Premium Shipping across GCC on orders over 200 AED | 🔒 100% Secure Checkout</span>
+            <span>{{ section.blocks.first.settings.text | escape }}</span>
           </p>
         </div>
     {%- elsif section.blocks.size > 1 -%}
