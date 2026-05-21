@@ -4177,4 +4177,284 @@ media-gallery .thumbnail img {
   text-shadow: 0 0 8px rgba(211, 47, 47, 0.1) !important;
 }
 
+/* ==========================================================================
+   MOBILE MENU OVERLAP & LOCALIZATION IMPROVEMENTS
+   ========================================================================== */
+@media screen and (max-width: 749px) {
+  /* 1. Sleek Pill-Button styling for localization selectors in the mobile utility drawer */
+  .menu-drawer__localization .disclosure__button {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    padding: 1.2rem 2rem !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 1.5rem !important;
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    height: auto !important;
+    min-height: 4.8rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .menu-drawer__localization .disclosure__button:hover,
+  .menu-drawer__localization .disclosure__button:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+  }
+
+  /* Rotate caret inside trigger button when expanded */
+  .menu-drawer__localization .disclosure__button[aria-expanded="true"] .icon-caret {
+    transform: rotate(180deg) !important;
+  }
+
+  /* Ensure container doesn't overflow */
+  .menu-drawer__localization .disclosure {
+    position: static !important;
+  }
+
+  /* 2. Position the Country & Language selector lists to slide up beautifully at the bottom of the drawer */
+  .menu-drawer__localization .disclosure__list-wrapper {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 70% !important;
+    max-height: 70vh !important;
+    background-color: var(--lumu-purple, #6153a7) !important;
+    border: none !important;
+    border-top: 2px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 20px 20px 0 0 !important;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3) !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transform: translateY(0) !important;
+    animation: lumuSlideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards !important;
+  }
+
+  @keyframes lumuSlideUp {
+    from {
+      transform: translateY(100%) !important;
+    }
+    to {
+      transform: translateY(0) !important;
+    }
+  }
+
+  /* 3. Style the search and header area inside the country selector */
+  .menu-drawer__localization .country-filter {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+    padding: 2rem 2.5rem 1.5rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1.5rem !important;
+  }
+
+  .menu-drawer__localization .country-filter .field {
+    flex: 1 !important;
+    display: flex !important;
+    position: relative !important;
+  }
+
+  .menu-drawer__localization .country-filter__input {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+    padding: 1.2rem 4rem 1.2rem 1.5rem !important;
+    font-size: 1.4rem !important;
+    width: 100% !important;
+    height: 4.4rem !important;
+  }
+
+  .menu-drawer__localization .country-filter__input:focus {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) !important;
+  }
+
+  .menu-drawer__localization .country-filter__input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  .menu-drawer__localization .country-filter .field__label {
+    display: none !important; /* Hide label to save space and keep placeholder clear */
+  }
+
+  /* Reset and search icons inside search box */
+  .menu-drawer__localization .country-filter__search-icon,
+  .menu-drawer__localization .country-filter__reset-button {
+    color: rgba(255, 255, 255, 0.6) !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    height: 100% !important;
+  }
+
+  .menu-drawer__localization .country-filter__search-icon {
+    right: 1.5rem !important;
+    pointer-events: none !important;
+  }
+
+  .menu-drawer__localization .country-filter__reset-button {
+    right: 1.5rem !important;
+    cursor: pointer !important;
+  }
+
+  .menu-drawer__localization .country-filter__search-icon svg,
+  .menu-drawer__localization .country-filter__reset-button svg {
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+    stroke: currentColor !important;
+    fill: none !important;
+  }
+
+  /* X / Close button next to the search box */
+  .menu-drawer__localization .country-selector__close-button.link {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 50% !important;
+    width: 4rem !important;
+    height: 4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    transition: background-color 0.2s ease !important;
+  }
+
+  .menu-drawer__localization .country-selector__close-button.link:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .menu-drawer__localization .country-selector__close-button svg {
+    width: 1.6rem !important;
+    height: 1.6rem !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+
+  /* 4. Style the Scrollable Countries & Languages List */
+  .menu-drawer__localization .disclosure__list {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 1.5rem 2rem !important;
+    max-height: calc(70vh - 8rem) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .menu-drawer__localization .disclosure__item {
+    list-style: none !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  /* Sleek List Row Items */
+  .menu-drawer__localization .disclosure__link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 1.2rem 1.8rem !important;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 1.45rem !important;
+    font-weight: 500 !important;
+    border-radius: 10px !important;
+    background-color: transparent !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .menu-drawer__localization .disclosure__link:hover,
+  .menu-drawer__localization .disclosure__link:focus,
+  .menu-drawer__localization .disclosure__link[aria-current="true"] {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    padding-left: 2.2rem !important; /* Micro-interaction slide effect */
+  }
+
+  /* Display currency with nice high-contrast styling */
+  .menu-drawer__localization .disclosure__link .localization-form__currency {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    padding: 0.2rem 0.8rem !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin-left: auto !important;
+    opacity: 1 !important; /* Force always visible on mobile */
+  }
+
+  /* Align tickmark indicator beautifully on the left side of country names */
+  .menu-drawer__localization .disclosure__link .icon-checkmark {
+    width: 1.4rem !important;
+    height: 1.4rem !important;
+    color: #ffffff !important;
+    fill: currentColor !important;
+    margin-right: 1.2rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Smoothly display checking icon or hidden state */
+  .menu-drawer__localization .disclosure__link span:first-of-type {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .menu-drawer__localization .disclosure__link .visibility-hidden {
+    visibility: hidden !important;
+    width: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* 5. Mobile Localization Overlay Styling */
+  .menu-drawer__localization .country-selector__overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    z-index: 9998 !important;
+    animation: lumuFadeIn 0.25s ease forwards !important;
+  }
+
+  @keyframes lumuFadeIn {
+    from {
+      opacity: 0 !important;
+    }
+    to {
+      opacity: 1 !important;
+    }
+  }
+
+  /* Hide default browser focus rings to keep premium aesthetics */
+  .menu-drawer__localization .disclosure__list-wrapper:focus,
+  .menu-drawer__localization .disclosure__list:focus {
+    outline: none !important;
+  }
+}
+
 
