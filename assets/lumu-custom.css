@@ -4091,18 +4091,40 @@ media-gallery .thumbnail img {
 
 /* Polishing prices and price compare */
 .price {
-  font-size: 1.8rem !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+  margin: 10px 0 15px 0 !important;
 }
 
+.price__container {
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+/* Regular price when not on sale: Large Lumu Purple */
+.price:not(.price--on-sale) .price-item--regular {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  color: #8577C7 !important;
+  letter-spacing: normal !important;
+}
+
+/* Sale price when on sale: Large Lumu Purple */
 .price-item--sale {
   font-size: 2.2rem !important;
   font-weight: 800 !important;
   color: #8577C7 !important;
+  letter-spacing: normal !important;
 }
 
-.price-item--regular {
+/* Struck-through compare-at price when on sale: Muted Grey & Smaller */
+.price--on-sale .price-item--regular {
   font-size: 1.6rem !important;
   color: #a0a0b5 !important;
+  text-decoration: line-through !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
 }
 
 .price__badge-sale {
