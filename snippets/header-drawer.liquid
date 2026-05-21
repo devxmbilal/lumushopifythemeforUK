@@ -68,6 +68,20 @@
                   CONTACT US
                 </a>
               </li>
+              {%- if shop.customer_accounts_enabled -%}
+                <li>
+                  <a
+                    href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                    class="menu-drawer__menu-item list-menu__item link link--text focus-inset"
+                  >
+                    {%- if customer -%}
+                      MY ACCOUNT
+                    {%- else -%}
+                      SIGN IN / REGISTER
+                    {%- endif -%}
+                  </a>
+                </li>
+              {%- endif -%}
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">
