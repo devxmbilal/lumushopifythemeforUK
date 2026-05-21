@@ -41,15 +41,14 @@
     z-index: 1;
   }
 
-  /* Make slide 1 and 3 overlays slightly darker for enhanced text readability */
-  .lumu-slider__slide:nth-child(1) .lumu-slider__overlay,
-  .lumu-slider__slide:nth-child(3) .lumu-slider__overlay {
+  /* Make selected overlays slightly darker for enhanced text readability */
+  .lumu-slider__overlay--dark {
     background: linear-gradient(
       135deg,
-      rgba(5, 4, 15, 0.88) 0%,
-      rgba(15, 6, 35, 0.75) 50%,
-      rgba(5, 4, 15, 0.6) 100%
-    );
+      rgba(5, 4, 15, 0.92) 0%,
+      rgba(15, 6, 35, 0.82) 50%,
+      rgba(5, 4, 15, 0.7) 100%
+    ) !important;
   }
 
   /* Animated shimmer across overlay */
@@ -316,7 +315,7 @@
 
     <!-- Slide 1: Main brand hero -->
     <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-1.png' | asset_url }}');" role="group" aria-label="Slide 1 of 3">
-      <div class="lumu-slider__overlay"></div>
+      <div class="lumu-slider__overlay lumu-slider__overlay--dark"></div>
       <div class="lumu-slider__content">
         <span class="lumu-slider__eyebrow">🇬🇧 Free UK Delivery on Orders Over £40</span>
         <h2>Your Premium Lifestyle,<br><em>Delivered to Your Door</em></h2>
@@ -343,7 +342,7 @@
 
     <!-- Slide 3: Home & Beauty -->
     <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-3-premium.png' | asset_url }}');" role="group" aria-label="Slide 3 of 3">
-      <div class="lumu-slider__overlay"></div>
+      <div class="lumu-slider__overlay lumu-slider__overlay--dark"></div>
       <div class="lumu-slider__content">
         <span class="lumu-slider__eyebrow">🏡 Transform Your Home & Glow Up</span>
         <h2>Premium Home &<br><em>Beauty Essentials</em></h2>
