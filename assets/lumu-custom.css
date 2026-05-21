@@ -3918,10 +3918,25 @@ button.button.button--primary:hover {
     display: block !important;
   }
 
+  media-gallery > slider-component:not(.thumbnail-slider) {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .product__media-list {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .product__media-item {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
   media-gallery > slider-component.thumbnail-slider {
     display: flex !important;
     align-items: center !important;
-    margin-top: 12px !important;
+    margin-top: 2px !important;
   }
 
   media-gallery .thumbnail-list {
