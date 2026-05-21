@@ -3848,55 +3848,37 @@ button.button.button--primary:hover {
     padding-left: 4.5rem !important;
   }
 
-  /* 2. Vertical Left Thumbnails Gallery Layout */
+  /* 2. Compact Bottom Thumbnails Spacing & Layout */
   media-gallery {
-    display: flex !important;
-    flex-direction: row-reverse !important;
-    gap: 22px !important;
-    align-items: flex-start !important;
+    display: block !important;
   }
 
-  /* Main slide viewer takes remaining flex width */
-  media-gallery > slider-component:first-of-type {
-    flex: 1 !important;
-    width: auto !important;
-    max-width: 100% !important;
-  }
-
-  /* Left-aligned vertical thumbnail slider container */
   media-gallery > slider-component.thumbnail-slider {
-    flex-direction: column !important;
-    width: 88px !important;
-    flex-shrink: 0 !important;
     display: flex !important;
+    align-items: center !important;
+    margin-top: 12px !important;
   }
 
-  /* Thumbnail list overrides for vertical stacking and elegant scrolling */
   media-gallery .thumbnail-list {
     display: flex !important;
-    flex-direction: column !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    max-height: 520px !important;
-    gap: 12px !important;
-    padding: 2px !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    justify-content: flex-start !important;
     scrollbar-width: none !important;
-    grid-template-columns: none !important;
   }
 
-  /* Hide vertical scrollbars across browsers */
   media-gallery .thumbnail-list::-webkit-scrollbar {
     display: none !important;
   }
 
-  /* Each vertical thumbnail item */
   media-gallery .thumbnail-list__item {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: 0 0 auto !important;
+    width: 72px !important;
+    max-width: 72px !important;
+    flex: 0 0 72px !important;
   }
 
-  /* Hide default caret buttons on vertical desktop gallery */
+  /* Hide horizontal slider caret buttons on desktop for cleaner look */
   media-gallery .thumbnail-slider .slider-button {
     display: none !important;
   }
