@@ -1797,23 +1797,31 @@ details-modal.header__search {
   transform: translateY(-1px);
 }
 
-.header__inline-menu .header__menu-item span {
-  position: relative;
-}
-
+/* Eliminate custom purple underlines completely */
 .header__inline-menu .header__menu-item span::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--lumu-purple);
-  transition: width 0.3s ease;
+  display: none !important;
+  content: none !important;
 }
 
-.header__inline-menu .header__menu-item:hover span::after {
-  width: 100%;
+/* Disable Dawn's default text-decoration underlines globally on header menu items */
+.header__menu-item:hover span,
+.header__active-menu-item,
+.header__menu-item:hover .header__active-menu-item,
+details[open] > .header__menu-item,
+details[open]:hover > .header__menu-item {
+  text-decoration: none !important;
+}
+
+/* Highlight the active/current menu item in the brand purple color */
+.header__inline-menu .header__active-menu-item {
+  color: var(--lumu-purple) !important;
+  font-weight: 800 !important;
+}
+
+/* Maintain active color state even on parent disclosures and detail blocks */
+.header__inline-menu details[open] > .header__menu-item,
+.header__inline-menu details[open] > .header__menu-item span {
+  color: var(--lumu-purple) !important;
 }
 
 /* Dropdown Premium Styling */
