@@ -779,11 +779,17 @@
       </div>
       <div class="product-tabs-content">
         <div id="tab-description" class="product-tab-panel active rte">
-          {%- if product.description != blank -%}
-            {{ product.description }}
-          {%- else -%}
-            <p>Experience the perfect blend of quality, innovation, and value. This product has been hand-picked by the Lumu team to meet the highest standards. Order yours today and enjoy fast tracked delivery across the UK.</p>
-          {%- endif -%}
+          <div class="lumu-description-inner collapsed">
+            {%- if product.description != blank -%}
+              {{ product.description }}
+            {%- else -%}
+              <p>Experience the perfect blend of quality, innovation, and value. This product has been hand-picked by the Lumu team to meet the highest standards. Order yours today and enjoy fast tracked delivery across the UK.</p>
+            {%- endif -%}
+          </div>
+          <button type="button" class="lumu-read-more-btn" aria-expanded="false">
+            <span class="btn-text">See More</span>
+            <span class="btn-icon">▼</span>
+          </button>
         </div>
         <div id="tab-specifications" class="product-tab-panel rte">
           {%- if product.metafields.custom.specifications != blank -%}
@@ -862,6 +868,39 @@
             btn.classList.add('active');
             document.getElementById(btn.dataset.tab).classList.add('active');
           });
+        });
+
+        // Setup Read More / See More collapsible descriptions
+        document.querySelectorAll('.lumu-read-more-btn').forEach(btn => {
+          const container = btn.closest('.product-tab-panel');
+          if (!container) return;
+          const inner = container.querySelector('.lumu-description-inner');
+          if (!inner) return;
+
+          // Only enable collapsible behaviors if content is long enough (greater than 190px scroll height)
+          if (inner.scrollHeight <= 190) {
+            btn.style.display = 'none';
+            inner.classList.remove('collapsed');
+          } else {
+            btn.addEventListener('click', () => {
+              const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+              if (isExpanded) {
+                inner.classList.add('collapsed');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.querySelector('.btn-text').textContent = 'See More';
+                
+                // Scroll back to the top of the tabs container smoothly
+                const tabContainer = document.querySelector('.product-tabs-container');
+                if (tabContainer) {
+                  tabContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              } else {
+                inner.classList.remove('collapsed');
+                btn.setAttribute('aria-expanded', 'true');
+                btn.querySelector('.btn-text').textContent = 'See Less';
+              }
+            });
+          }
         });
       });
     </script>
