@@ -16,6 +16,7 @@
   .lumu-slider__slide {
     min-width: 100%;
     position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,14 +32,17 @@
 
   .lumu-slider__overlay {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
       135deg,
       rgba(10, 8, 30, 0.75) 0%,
       rgba(26, 10, 60, 0.55) 50%,
       rgba(10, 8, 30, 0.4) 100%
     );
-    z-index: 1;
+    z-index: 2;
   }
 
   /* Make selected overlays slightly darker for enhanced text readability */
@@ -55,7 +59,10 @@
   .lumu-slider__overlay::after {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
       105deg,
       rgba(133, 119, 199, 0) 30%,
@@ -73,7 +80,7 @@
 
   .lumu-slider__content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     text-align: center;
     color: white;
     max-width: 800px;
