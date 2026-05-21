@@ -522,9 +522,28 @@
                     if (!el) return;
                     // UK dispatch cutoff: 5PM London time
                     const CUTOFF_HOUR_UK = 17;
-                    function getTimeRemaining() {
+                    function getLondonTime() {
                       const now = new Date();
-                      const ukNow = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+                      const formatter = new Intl.DateTimeFormat('en-US', {
+                        timeZone: 'Europe/London',
+                        year: 'numeric', month: 'numeric', day: 'numeric',
+                        hour: 'numeric', minute: 'numeric', second: 'numeric',
+                        hour12: false
+                      });
+                      const parts = formatter.formatToParts(now);
+                      const map = {};
+                      parts.forEach(p => map[p.type] = p.value);
+                      return new Date(
+                        parseInt(map.year, 10),
+                        parseInt(map.month, 10) - 1,
+                        parseInt(map.day, 10),
+                        parseInt(map.hour, 10),
+                        parseInt(map.minute, 10),
+                        parseInt(map.second, 10)
+                      );
+                    }
+                    function getTimeRemaining() {
+                      const ukNow = getLondonTime();
                       const cutoff = new Date(ukNow);
                       cutoff.setHours(CUTOFF_HOUR_UK, 0, 0, 0);
                       if (ukNow >= cutoff) {

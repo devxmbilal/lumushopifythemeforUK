@@ -3832,3 +3832,258 @@ button.button.button--primary:hover {
    SCROLL ELEVATION SCRIPT BOOTSTRAP
    ============================================ */
 
+/* ============================================
+   PHASE 2: PREMIUM PRODUCT PAGE UPGRADE
+   ============================================ */
+
+@media screen and (min-width: 990px) {
+  /* 1. Balanced Desktop Columns Split (52% Media / 48% Text Column) */
+  .product:not(.product--no-media) .product__media-wrapper {
+    max-width: 52% !important;
+    width: calc(52% - var(--grid-desktop-horizontal-spacing) / 2) !important;
+  }
+  .product:not(.product--no-media) .product__info-wrapper {
+    max-width: 48% !important;
+    width: calc(48% - var(--grid-desktop-horizontal-spacing) / 2) !important;
+    padding-left: 4.5rem !important;
+  }
+
+  /* 2. Vertical Left Thumbnails Gallery Layout */
+  media-gallery {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    gap: 22px !important;
+    align-items: flex-start !important;
+  }
+
+  /* Main slide viewer takes remaining flex width */
+  media-gallery > slider-component:first-of-type {
+    flex: 1 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Left-aligned vertical thumbnail slider container */
+  media-gallery > slider-component.thumbnail-slider {
+    flex-direction: column !important;
+    width: 88px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+  }
+
+  /* Thumbnail list overrides for vertical stacking and elegant scrolling */
+  media-gallery .thumbnail-list {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: 520px !important;
+    gap: 12px !important;
+    padding: 2px !important;
+    scrollbar-width: none !important;
+    grid-template-columns: none !important;
+  }
+
+  /* Hide vertical scrollbars across browsers */
+  media-gallery .thumbnail-list::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Each vertical thumbnail item */
+  media-gallery .thumbnail-list__item {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Hide default caret buttons on vertical desktop gallery */
+  media-gallery .thumbnail-slider .slider-button {
+    display: none !important;
+  }
+}
+
+/* 3. Elegant Thumbnail Hover Animations & Active States */
+media-gallery .thumbnail {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  border: 2px solid transparent !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: #ffffff !important;
+  position: relative !important;
+}
+
+media-gallery .thumbnail:hover {
+  opacity: 0.95 !important;
+  border-color: rgba(133, 119, 199, 0.4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(133, 119, 199, 0.12) !important;
+}
+
+media-gallery .thumbnail[aria-current="true"] {
+  border-color: #8577C7 !important;
+  box-shadow: 0 6px 18px rgba(133, 119, 199, 0.25) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+media-gallery .thumbnail img {
+  border-radius: 8px !important;
+  object-fit: cover !important;
+}
+
+/* 4. Compact Premium Product Title */
+.product__title h1,
+.product__title h2.h1 {
+  font-size: clamp(2.1rem, 2.3vw, 2.6rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.2 !important;
+  color: #0f0e2a !important;
+  margin: 0 !important;
+}
+
+/* Elegant Vendor/Category tag above title */
+.product__text.inline-richtext {
+  display: inline-block !important;
+  background: rgba(133, 119, 199, 0.08) !important;
+  color: #8577C7 !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+/* 5. Elegant Swatch Variant Pickers */
+.product-form__input input[type="radio"] + label {
+  border-radius: 8px !important;
+  border: 1.5px solid rgba(133, 119, 199, 0.15) !important;
+  background: #ffffff !important;
+  color: #4a4a5e !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  padding: 10px 18px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.product-form__input input[type="radio"] + label:hover {
+  border-color: rgba(133, 119, 199, 0.5) !important;
+  background: rgba(133, 119, 199, 0.03) !important;
+  color: #8577C7 !important;
+}
+
+.product-form__input input[type="radio"]:checked + label {
+  background: linear-gradient(135deg, #8577C7, #6153a7) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(97, 83, 167, 0.25) !important;
+}
+
+/* Variant Fieldset Title */
+.product-form__input .form__label {
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  color: #0f0e2a !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 8px !important;
+}
+
+/* 6. Premium Quantity Selector Box */
+.quantity {
+  border-radius: 8px !important;
+  border: 1.5px solid rgba(133, 119, 199, 0.15) !important;
+  background: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.quantity__button {
+  color: #6b6b80 !important;
+  transition: color 0.2s ease !important;
+}
+
+.quantity__button:hover {
+  color: #8577C7 !important;
+}
+
+.quantity__input {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: #0f0e2a !important;
+}
+
+/* Enhancing CTA Add-to-Cart Action Button */
+.product-form__buttons .button--primary {
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #8577C7, #6153a7) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 1.55rem !important;
+  letter-spacing: 0.04em !important;
+  padding: 16px 28px !important;
+  min-height: 54px !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(97, 83, 167, 0.28) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.product-form__buttons .button--primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(97, 83, 167, 0.4) !important;
+  filter: brightness(1.05) !important;
+}
+
+/* Polishing prices and price compare */
+.price {
+  font-size: 1.8rem !important;
+}
+
+.price-item--sale {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  color: #8577C7 !important;
+}
+
+.price-item--regular {
+  font-size: 1.6rem !important;
+  color: #a0a0b5 !important;
+}
+
+.price__badge-sale {
+  background: rgba(46, 125, 50, 0.08) !important;
+  color: #2e7d32 !important;
+  border: 1px solid rgba(46, 125, 50, 0.15) !important;
+  border-radius: 6px !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  padding: 4px 8px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Sleeker Urgency Timer Card Layout */
+.lumu-urgency-timer {
+  border-radius: 12px !important;
+  border: 1.5px solid rgba(211, 47, 47, 0.15) !important;
+  background: rgba(211, 47, 47, 0.02) !important;
+  padding: 14px 18px !important;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.01) !important;
+}
+
+.lumu-urgency-timer p {
+  color: #3a1a1a !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+}
+
+.lumu-urgency-timer strong {
+  color: #d32f2f !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  text-shadow: 0 0 8px rgba(211, 47, 47, 0.1) !important;
+}
+
+
