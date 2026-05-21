@@ -41,6 +41,17 @@
     z-index: 1;
   }
 
+  /* Make slide 1 and 3 overlays slightly darker for enhanced text readability */
+  .lumu-slider__slide:nth-child(1) .lumu-slider__overlay,
+  .lumu-slider__slide:nth-child(3) .lumu-slider__overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(5, 4, 15, 0.88) 0%,
+      rgba(15, 6, 35, 0.75) 50%,
+      rgba(5, 4, 15, 0.6) 100%
+    );
+  }
+
   /* Animated shimmer across overlay */
   .lumu-slider__overlay::after {
     content: '';
