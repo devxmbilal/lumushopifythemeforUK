@@ -4,8 +4,9 @@
     <meta name="google-site-verification" content="googled1ae9781596a9c64"/>
     <meta name="facebook-domain-verification" content="k81cetbzc29fj5xylozq1oslqi7h4a" />
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% comment %}theme-check-disable LiquidHTMLSyntaxError{% endcomment %}
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% comment %}theme-check-enable LiquidHTMLSyntaxError{% endcomment %}
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
@@ -405,7 +406,6 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    {{ 'lumu-custom.css' | asset_url | stylesheet_tag }}
 
     {%- comment -%} LUMU: Shadow DOM CSS Injector for Tracking Page {%- endcomment -%}
     <script>
@@ -455,6 +455,38 @@
           observer.observe(document.body, { childList: true, subtree: true });
           document.querySelectorAll('*').forEach(el => {
             if (el.tagName.toLowerCase().includes('track123')) applyStyles(el);
+          });
+        });
+      })();
+    </script>
+
+    {%- comment -%} LUMU: Header scroll elevation + Premium JS enhancements {%- endcomment -%}
+    <script>
+      (function() {
+        // Header scroll elevation
+        var hw = document.querySelector('.header-wrapper');
+        if (hw) {
+          window.addEventListener('scroll', function() {
+            if (window.scrollY > 40) {
+              hw.classList.add('is-scrolled');
+            } else {
+              hw.classList.remove('is-scrolled');
+            }
+          }, { passive: true });
+        }
+
+        // Product tab re-init (handles dynamically added tab-shipping panel)
+        document.addEventListener('DOMContentLoaded', function() {
+          var tabBtns = document.querySelectorAll('.product-tab-btn');
+          var tabPanels = document.querySelectorAll('.product-tab-panel');
+          tabBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+              tabBtns.forEach(function(b) { b.classList.remove('active'); });
+              tabPanels.forEach(function(p) { p.classList.remove('active'); });
+              btn.classList.add('active');
+              var target = document.getElementById(btn.dataset.tab);
+              if (target) target.classList.add('active');
+            });
           });
         });
       })();

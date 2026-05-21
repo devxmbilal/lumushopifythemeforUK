@@ -1,113 +1,212 @@
 <style>
+  /* ============ LUMU TRUST FEATURES — UK Edition ============ */
   .lumu-trust {
-    background: linear-gradient(135deg, #8577C7 0%, #6153a7 100%);
-    padding: 64px 0;
+    background: linear-gradient(135deg, #8577C7 0%, #5341a0 50%, #3a2880 100%);
+    padding: 72px 0;
+    position: relative;
+    overflow: hidden;
   }
+
+  .lumu-trust::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+
+  .lumu-trust::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+
   .lumu-trust__title {
-    text-align: center; margin-bottom: 48px; position: relative; padding-bottom: 16px;
-  }
-  .lumu-trust__title h2 {
-    font-size: 3rem; font-weight: 800; color: white; letter-spacing: -0.02em;
-  }
-  .lumu-trust__title::after {
-    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 50px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 3px;
-  }
-  .lumu-trust__grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-    max-width: 1200px; margin: 0 auto; padding: 0 20px;
-  }
-  .lumu-trust__card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 16px;
-    padding: 32px 24px;
     text-align: center;
-    transition: all 0.35s ease;
+    margin-bottom: 52px;
+    position: relative;
+    padding-bottom: 20px;
   }
+
+  .lumu-trust__title-eyebrow {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 10px;
+  }
+
+  .lumu-trust__title h2 {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .lumu-trust__title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 3px;
+    background: rgba(255,255,255,0.45);
+    border-radius: 4px;
+  }
+
+  .lumu-trust__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lumu-trust__card {
+    background: rgba(255,255,255,0.09);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lumu-trust__card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.5), rgba(255,255,255,0.05));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
   .lumu-trust__card:hover {
-    background: rgba(255,255,255,0.2);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
   }
+
+  .lumu-trust__card:hover::before { opacity: 1; }
+
   .lumu-trust__icon {
-    width: 60px; height: 60px; margin: 0 auto 18px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 20px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
   }
+
+  .lumu-trust__card:hover .lumu-trust__icon {
+    background: rgba(255,255,255,0.22);
+    transform: scale(1.1);
+  }
+
   .lumu-trust__icon svg {
-    width: 28px; height: 28px; color: white; stroke: white; fill: none;
+    width: 30px;
+    height: 30px;
+    color: white;
+    stroke: white;
+    fill: none;
   }
+
   .lumu-trust__card-title {
-    font-size: 1.6rem; font-weight: 700; color: white;
-    margin-bottom: 8px; letter-spacing: 0.01em;
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
   }
+
   .lumu-trust__card-text {
-    font-size: 1.35rem; color: rgba(255,255,255,0.8);
-    line-height: 1.55;
+    font-size: 1.35rem;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.6;
   }
+
   @media (max-width: 989px) {
     .lumu-trust__grid { grid-template-columns: repeat(2, 1fr); }
   }
+
   @media (max-width: 549px) {
-    .lumu-trust__grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-    .lumu-trust__card { padding: 22px 16px; }
-    .lumu-trust__icon { width: 48px; height: 48px; border-radius: 12px; }
-    .lumu-trust__icon svg { width: 22px; height: 22px; }
-    .lumu-trust__card-title { font-size: 1.4rem; }
+    .lumu-trust { padding: 52px 0; }
+    .lumu-trust__grid { grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 16px; }
+    .lumu-trust__card { padding: 24px 16px; border-radius: 16px; }
+    .lumu-trust__icon { width: 52px; height: 52px; border-radius: 14px; }
+    .lumu-trust__icon svg { width: 24px; height: 24px; }
+    .lumu-trust__card-title { font-size: 1.45rem; }
     .lumu-trust__card-text { font-size: 1.2rem; }
-    .lumu-trust__title h2 { font-size: 2.2rem; }
   }
 </style>
 
 <div class="lumu-trust">
   <div class="lumu-trust__title">
+    <span class="lumu-trust__title-eyebrow">The Lumu Advantage</span>
     <h2>Why Shop With Lumu?</h2>
   </div>
+
   <div class="lumu-trust__grid">
-    <!-- Premium Shipping -->
+    <!-- Free UK Shipping -->
     <div class="lumu-trust__card">
       <div class="lumu-trust__icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
         </svg>
       </div>
-      <div class="lumu-trust__card-title">Premium Shipping</div>
-      <div class="lumu-trust__card-text">Tracked and secure delivery across the UAE & GCC straight to your doorstep. Free shipping on orders over 200 AED across the UAE.</div>
+      <div class="lumu-trust__card-title">Free UK Delivery</div>
+      <div class="lumu-trust__card-text">Free tracked delivery on all orders over £40. Next-day dispatch available on most items — delivered straight to your door.</div>
     </div>
+
     <!-- Quality Promise -->
     <div class="lumu-trust__card">
       <div class="lumu-trust__icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
         </svg>
       </div>
-      <div class="lumu-trust__card-title">Quality Promise</div>
-      <div class="lumu-trust__card-text">We stand by our products. If something isn't right, our team is here to help with a straightforward return process.</div>
+      <div class="lumu-trust__card-title">Quality Guaranteed</div>
+      <div class="lumu-trust__card-text">Every product is hand-picked and quality checked. Not happy? Our simple 7-day returns process has you covered — no questions asked.</div>
     </div>
-    <!-- Safe & Flexible Checkout -->
+
+    <!-- Secure Checkout -->
     <div class="lumu-trust__card">
       <div class="lumu-trust__icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 11 14 15 10"/>
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
         </svg>
       </div>
-      <div class="lumu-trust__card-title">Safe & Flexible Checkout</div>
-      <div class="lumu-trust__card-text">Shop with confidence. We offer 100% secure card payments and convenient Cash on Delivery (COD) options.</div>
+      <div class="lumu-trust__card-title">100% Secure Checkout</div>
+      <div class="lumu-trust__card-text">Shop with total confidence using Visa, Mastercard, PayPal or Shop Pay. All transactions are SSL-encrypted and fully protected.</div>
     </div>
-    <!-- We're Here For You -->
+
+    <!-- 24/7 Support -->
     <div class="lumu-trust__card">
       <div class="lumu-trust__icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          <line x1="9" y1="10" x2="15" y2="10"/>
         </svg>
       </div>
-      <div class="lumu-trust__card-title">We're Here For You</div>
-      <div class="lumu-trust__card-text">Got a question? Our dedicated support team is just an email or message away to ensure a smooth shopping experience.</div>
+      <div class="lumu-trust__card-title">Friendly UK Support</div>
+      <div class="lumu-trust__card-text">Our dedicated customer care team is available 7 days a week via email and live chat. We're always here to help you.</div>
     </div>
   </div>
 </div>

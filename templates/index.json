@@ -186,10 +186,10 @@
       "type": "lumu-brand-story",
       "settings": {
         "subtitle": "THE LUMU PROMISE",
-        "title": "Curated Excellence, Delivered Across the GCC",
-        "text": "<p>At Lumu, we believe your shopping experience should be absolutely effortless. We globally source the finest fashion, high-tech gadgets, and home essentials to bring you unparalleled value. Sit back and relax while we handle everything from secure checkout to reliable tracked delivery across the GCC region.</p>",
+        "title": "Curated Excellence, Delivered Across the UK & Europe",
+        "text": "<p>At Lumu, we believe your shopping experience should be absolutely effortless. We globally source the finest tech gadgets, home essentials, health & beauty, and fashion accessories — bringing you unparalleled quality and value. From secure checkout to fast tracked delivery across the UK & Europe, we handle everything so you can shop with confidence.</p>",
         "button_label": "Explore Our Collections",
-        "button_link": ""
+        "button_link": "/collections"
       }
     },
     "lumu_customer_reviews": {

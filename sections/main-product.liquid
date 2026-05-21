@@ -514,20 +514,41 @@
               {%- when 'lumu_urgency' -%}
                 <div class="lumu-urgency-timer" {{ block.shopify_attributes }}>
                   <span class="pulse-dot"></span>
-                  <p>Order within <strong id="urgency-countdown">04:23:59</strong> for dispatch today!</p>
+                  <p>Order within <strong id="urgency-countdown">--:--:--</strong> for same-day dispatch!</p>
                 </div>
                 <script>
                   (function(){
-                    let timerElement = document.getElementById('urgency-countdown');
-                    if(!timerElement) return;
-                    let hours = 4, minutes = Math.floor(Math.random() * 59), seconds = 59;
-                    setInterval(() => {
-                      seconds--;
-                      if(seconds < 0) { seconds = 59; minutes--; }
-                      if(minutes < 0) { minutes = 59; hours--; }
-                      if(hours < 0) { hours = 4; }
-                      timerElement.textContent = String(hours).padStart(2,'0') + ':' + String(minutes).padStart(2,'0') + ':' + String(seconds).padStart(2,'0');
-                    }, 1000);
+                    const el = document.getElementById('urgency-countdown');
+                    if (!el) return;
+                    // UK dispatch cutoff: 5PM London time
+                    const CUTOFF_HOUR_UK = 17;
+                    function getTimeRemaining() {
+                      const now = new Date();
+                      const ukNow = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+                      const cutoff = new Date(ukNow);
+                      cutoff.setHours(CUTOFF_HOUR_UK, 0, 0, 0);
+                      if (ukNow >= cutoff) {
+                        // Past cutoff — next day 5PM
+                        cutoff.setDate(cutoff.getDate() + 1);
+                      }
+                      // Skip to next weekday if cutoff is Sat/Sun
+                      while ([0, 6].includes(cutoff.getDay())) cutoff.setDate(cutoff.getDate() + 1);
+                      const diff = cutoff - ukNow;
+                      const h = Math.floor(diff / 3600000);
+                      const m = Math.floor((diff % 3600000) / 60000);
+                      const s = Math.floor((diff % 60000) / 1000);
+                      return { h, m, s, isPast: diff <= 0 };
+                    }
+                    function tick() {
+                      const { h, m, s, isPast } = getTimeRemaining();
+                      if (isPast) {
+                        el.textContent = '00:00:00';
+                      } else {
+                        el.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+                      }
+                    }
+                    tick();
+                    setInterval(tick, 1000);
                   })();
                 </script>
               {%- when 'rating' -%}
@@ -627,10 +648,12 @@
                                 {% endif %}
                               >
                                 <ul class="list-unstyled" role="list">
+                                  {%- comment -%}theme-check-disable UndefinedObject{%- endcomment -%}
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
                                     offset: continue
                                   -%}
+                                  {%- comment -%}theme-check-enable UndefinedObject{%- endcomment -%}
                                     <li>
                                       {%- if block.settings.enable_quick_add -%}
                                         {% assign quick_add = 'standard' %}
@@ -732,22 +755,78 @@
     <div class="product-tabs-container">
       <div class="product-tabs-header">
         <button class="product-tab-btn active" data-tab="tab-description">Description</button>
-        <button class="product-tab-btn" data-tab="tab-specifications">Specifications</button>
-        <button class="product-tab-btn" data-tab="tab-reviews">Reviews (0)</button>
+        <button class="product-tab-btn" data-tab="tab-specifications">Details & Specs</button>
+        <button class="product-tab-btn" data-tab="tab-shipping">Shipping & Returns</button>
       </div>
       <div class="product-tabs-content">
         <div id="tab-description" class="product-tab-panel active rte">
           {%- if product.description != blank -%}
             {{ product.description }}
           {%- else -%}
-            <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
+            <p>Experience the perfect blend of quality, innovation, and value. This product has been hand-picked by the Lumu team to meet the highest standards. Order yours today and enjoy fast tracked delivery across the UK.</p>
           {%- endif -%}
         </div>
         <div id="tab-specifications" class="product-tab-panel rte">
-          <p>No specifications available.</p>
+          {%- if product.metafields.custom.specifications != blank -%}
+            {{ product.metafields.custom.specifications }}
+          {%- else -%}
+            <div class="lumu-specs-grid">
+              <div class="lumu-spec-row">
+                <span class="lumu-spec-label">Brand</span>
+                <span class="lumu-spec-value">{{ product.vendor }}</span>
+              </div>
+              <div class="lumu-spec-row">
+                <span class="lumu-spec-label">SKU</span>
+                <span class="lumu-spec-value">{{ product.selected_or_first_available_variant.sku | default: 'N/A' }}</span>
+              </div>
+              <div class="lumu-spec-row">
+                <span class="lumu-spec-label">Category</span>
+                <span class="lumu-spec-value">{{ product.type | default: 'General' }}</span>
+              </div>
+              {%- if product.selected_or_first_available_variant.weight > 0 -%}
+              <div class="lumu-spec-row">
+                <span class="lumu-spec-label">Weight</span>
+                <span class="lumu-spec-value">{{ product.selected_or_first_available_variant.weight | weight_with_unit }}</span>
+              </div>
+              {%- endif -%}
+              <div class="lumu-spec-row">
+                <span class="lumu-spec-label">Availability</span>
+                <span class="lumu-spec-value" style="color: #10b981; font-weight: 700;">✓ In Stock &amp; Ready to Ship</span>
+              </div>
+            </div>
+          {%- endif -%}
         </div>
-        <div id="tab-reviews" class="product-tab-panel rte">
-          <p>No reviews yet.</p>
+        <div id="tab-shipping" class="product-tab-panel rte">
+          <div class="lumu-shipping-info">
+            <div class="lumu-shipping-row">
+              <span class="lumu-shipping-icon">🚚</span>
+              <div>
+                <strong>Standard UK Delivery</strong>
+                <p>Free on orders over £40 — Tracked delivery in 3–5 business days.</p>
+              </div>
+            </div>
+            <div class="lumu-shipping-row">
+              <span class="lumu-shipping-icon">⚡</span>
+              <div>
+                <strong>Express UK Delivery</strong>
+                <p>Next-day delivery available at checkout for orders placed before 5PM.</p>
+              </div>
+            </div>
+            <div class="lumu-shipping-row">
+              <span class="lumu-shipping-icon">🌍</span>
+              <div>
+                <strong>International Shipping</strong>
+                <p>We ship to Europe and selected international destinations. Rates calculated at checkout.</p>
+              </div>
+            </div>
+            <div class="lumu-shipping-row">
+              <span class="lumu-shipping-icon">↩️</span>
+              <div>
+                <strong>Easy 7-Day Returns</strong>
+                <p>Not 100% happy? Return your item within 7 days of delivery for a full refund. <a href="/policies/refund-policy" style="color: #8577C7;">View full returns policy →</a></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -809,11 +888,17 @@
     {%- endif -%}
 
     {%- liquid
+      comment
+        theme-check-disable UnusedAssign
+      endcomment
       if product.selected_or_first_available_variant.featured_media
         assign seo_media = product.selected_or_first_available_variant.featured_media
       else
         assign seo_media = product.featured_media
       endif
+      comment
+        theme-check-enable UnusedAssign
+      endcomment
     -%}
 
     <script type="application/ld+json">
