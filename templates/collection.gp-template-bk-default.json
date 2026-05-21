@@ -16,7 +16,7 @@
     "banner": {
       "settings": {
         "color_scheme": "scheme-5",
-        "show_collection_description": true,
+        "show_collection_description": false,
         "show_collection_image": true
       },
       "type": "main-collection-banner"
