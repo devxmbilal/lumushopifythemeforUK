@@ -2,21 +2,41 @@
 <div class="lumu-pre-footer-products">
   <div class="lumu-pfp__inner">
     <div class="lumu-pfp__header">
-      <h2 class="lumu-pfp__title">Trending Now</h2>
-      <a href="/collections/all" class="lumu-pfp__shop-btn">
+      <h2 class="lumu-pfp__title">{{ section.settings.title | default: 'Trending Now' }}</h2>
+      {%- assign collection_url = "/collections/all" -%}
+      {%- if section.settings.collection != blank -%}
+        {%- assign collection_url = section.settings.collection.url -%}
+      {%- endif -%}
+      <a href="{{ collection_url }}" class="lumu-pfp__shop-btn">
         Shop All Products
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
       </a>
     </div>
     <div class="lumu-pfp__grid">
-      {%- assign products_list = collections.all.products -%}
+      {%- assign selected_collection = section.settings.collection -%}
+      {%- if selected_collection != blank and selected_collection.products.size > 0 -%}
+        {%- assign products_list = selected_collection.products -%}
+        {%- assign loop_limit = section.settings.products_to_show | default: 4 -%}
+        {%- assign loop_offset = 0 -%}
+      {%- else -%}
+        {%- assign products_list = collections.all.products -%}
+        {%- assign loop_limit = section.settings.products_to_show | default: 4 -%}
+        {%- assign loop_offset = 8 -%}
+      {%- endif -%}
       {%- if products_list.size > 0 -%}
-        {%- for product in products_list limit: 4 offset: 8 -%}
+        {%- for product in products_list limit: loop_limit offset: loop_offset -%}
           <div class="lumu-pfp__card-wrapper" style="height: 100%;">
             <a href="{{ product.url }}" class="lumu-pfp__card">
               <div class="lumu-pfp__card-img-wrap">
                 {%- if product.featured_image != blank -%}
-                  <img src="{{ product.featured_image | image_url: width: 600, height: 600, crop: 'center' }}" alt="{{ product.title | escape }}" class="lumu-pfp__card-img" loading="lazy">
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600, height: 600, crop: 'center' }}"
+                    alt="{{ product.title | escape }}"
+                    class="lumu-pfp__card-img"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
                 {%- else -%}
                   <div class="lumu-pfp__card-img" style="background:#f0f0f5;"></div>
                 {%- endif -%}
@@ -79,7 +99,28 @@
   "name": "Lumu Footer Products",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Trending Now",
+      "label": "Heading"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Maximum products to show"
+    }
+  ],
   "presets": [
     {
       "name": "Lumu Footer Products"
