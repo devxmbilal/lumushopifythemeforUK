@@ -13,8 +13,13 @@
       </a>
     </div>
     <div class="lumu-pfp__grid">
+      {%- assign selected_products = section.settings.product_list -%}
       {%- assign selected_collection = section.settings.collection -%}
-      {%- if selected_collection != blank and selected_collection.products.size > 0 -%}
+      {%- if selected_products != blank and selected_products.size > 0 -%}
+        {%- assign products_list = selected_products -%}
+        {%- assign loop_limit = section.settings.products_to_show | default: 4 -%}
+        {%- assign loop_offset = 0 -%}
+      {%- elsif selected_collection != blank and selected_collection.products.size > 0 -%}
         {%- assign products_list = selected_collection.products -%}
         {%- assign loop_limit = section.settings.products_to_show | default: 4 -%}
         {%- assign loop_offset = 0 -%}
@@ -105,6 +110,12 @@
       "id": "title",
       "default": "Trending Now",
       "label": "Heading"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Select specific products",
+      "info": "If selected, overrides the collection option below."
     },
     {
       "type": "collection",
