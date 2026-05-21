@@ -21,6 +21,12 @@
       "type": "lumu-footer-products",
       "settings": {
         "title": "Trending Now",
+        "product_list": [
+          "smart-watch-men-women-fitness-tracker-blood-pressure-heart-rate-sport-watches-uk",
+          "mens-business-mechanical-watches",
+          "16-in-1-vegetable-chopper-salad-fruit-vegetable-food-chopper-slicer-peeler",
+          "4pc-stretch-fresh-storage-tray-vacuum-reusable-and-stackable-food-storage-tray-uk-new"
+        ],
         "collection": "trending-viral-finds",
         "products_to_show": 4
       }
