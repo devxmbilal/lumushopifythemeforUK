@@ -414,6 +414,18 @@ function initMobileFacetsPortal() {
   });
 }
 
+function closeMobileFacetsDrawer() {
+  const drawer = document.querySelector('menu-drawer.mobile-facets__wrapper');
+  const summary = drawer?.querySelector('summary');
+  if (summary) summary.click();
+}
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('[data-mobile-facets-close]')) return;
+  event.preventDefault();
+  closeMobileFacetsDrawer();
+});
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initMobileFacetsPortal);
 } else {

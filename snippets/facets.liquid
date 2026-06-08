@@ -502,6 +502,16 @@
                   {%- endif -%}
                 </p>
               </div>
+              <button
+                type="button"
+                class="mobile-facets__dismiss"
+                aria-label="{{ 'accessibility.close' | t }}"
+                data-mobile-facets-close
+              >
+                <span class="svg-wrapper">
+                  {{- 'icon-close.svg' | inline_asset_content -}}
+                </span>
+              </button>
             </div>
             <div
               id="FacetsWrapperMobile"
