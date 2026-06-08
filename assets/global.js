@@ -486,7 +486,12 @@ class MenuDrawer extends HTMLElement {
       this.mainDetailsToggle.classList.add('menu-opening');
     });
     summaryElement.setAttribute('aria-expanded', true);
-    trapFocus(this.mainDetailsToggle, summaryElement);
+    const facetMobileForm = document.getElementById('FacetFiltersFormMobile');
+    const focusContainer =
+      facetMobileForm && this.classList.contains('mobile-facets__wrapper')
+        ? facetMobileForm
+        : this.mainDetailsToggle;
+    trapFocus(focusContainer, summaryElement);
     document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
   }
 

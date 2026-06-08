@@ -934,29 +934,91 @@ span.price-item.price-item--sale.price-item--last {
   display: none !important;
 }
 
-/* Mobile filter drawer — keep full-screen overlay separate from header nav drawer */
-menu-drawer.mobile-facets__wrapper > details > summary::before {
-  position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 99 !important;
+/* Mobile filter drawer — full viewport overlay (not inline below products) */
+@media screen and (max-width: 989px) {
+  body.overflow-hidden-mobile #main-collection-filters,
+  body.overflow-hidden-mobile .facets-wrapper,
+  body.overflow-hidden-mobile .facets-container,
+  body.overflow-hidden-mobile menu-drawer.mobile-facets__wrapper,
+  body.overflow-hidden-mobile .shopify-section:has(.mobile-facets__wrapper) {
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+  }
+
+  menu-drawer.mobile-facets__wrapper > details > summary::before,
+  menu-drawer.mobile-facets__wrapper .disclosure-has-popup[open] > summary::before {
+    display: none !important;
+  }
+
+  menu-drawer.mobile-facets__wrapper .mobile-facets,
+  body > facet-filters-form:has(#FacetFiltersFormMobile) .mobile-facets {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 2000 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: stretch !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    pointer-events: none;
+  }
+
+  menu-drawer.mobile-facets__wrapper details[open] .mobile-facets,
+  body > facet-filters-form:has(#FacetFiltersFormMobile) .mobile-facets {
+    pointer-events: auto;
+  }
+
+  menu-drawer.mobile-facets__wrapper .mobile-facets__inner,
+  body > facet-filters-form:has(#FacetFiltersFormMobile) .mobile-facets__inner {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 42rem !important;
+    height: 100% !important;
+    min-height: 100dvh !important;
+    margin: 0 0 0 auto !important;
+    background-color: #ffffff !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.12) !important;
+    pointer-events: all !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform var(--duration-default) ease !important;
+  }
+
+  .js menu-drawer.mobile-facets__wrapper details:not(.menu-opening) .mobile-facets__inner {
+    transform: translateX(100%) !important;
+  }
+
+  menu-drawer.mobile-facets__wrapper details.menu-opening .mobile-facets__inner,
+  body > facet-filters-form.mobile-facets-portal-open .mobile-facets__inner {
+    transform: translateX(0) !important;
+  }
+
+  menu-drawer.mobile-facets__wrapper .mobile-facets__main {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+  }
+
+  menu-drawer.mobile-facets__wrapper .mobile-facets__footer {
+    margin-top: auto !important;
+    position: sticky !important;
+    bottom: 0 !important;
+    background: #ffffff !important;
+    z-index: 2 !important;
+  }
 }
 
-menu-drawer.mobile-facets__wrapper .mobile-facets {
-  position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  z-index: 100 !important;
-}
-
-menu-drawer.mobile-facets__wrapper .mobile-facets__inner {
-  background-color: #ffffff !important;
+@media screen and (max-width: 749px) {
+  menu-drawer.mobile-facets__wrapper .mobile-facets__inner,
+  body > facet-filters-form:has(#FacetFiltersFormMobile) .mobile-facets__inner {
+    max-width: 100% !important;
+  }
 }
 
 /* SEARCH RESULTS PAGE: make the template search input clearly visible */

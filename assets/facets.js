@@ -363,3 +363,59 @@ class FacetRemove extends HTMLElement {
 }
 
 customElements.define('facet-remove', FacetRemove);
+
+function initMobileFacetsPortal() {
+  const drawer = document.querySelector('menu-drawer.mobile-facets__wrapper');
+  if (!drawer || drawer.dataset.portalInit === 'true') return;
+
+  const details = drawer.querySelector('details.mobile-facets__disclosure');
+  const formHost = drawer.querySelector('facet-filters-form');
+  if (!details || !formHost) return;
+
+  drawer.dataset.portalInit = 'true';
+
+  const placeholder = document.createComment('mobile-facets-portal');
+  formHost.parentNode.insertBefore(placeholder, formHost);
+
+  const syncPortal = () => {
+    const isOpen = details.classList.contains('menu-opening') || details.hasAttribute('open');
+
+    if (isOpen) {
+      if (formHost.parentElement !== document.body) {
+        document.body.appendChild(formHost);
+      }
+      formHost.classList.add('mobile-facets-portal-open');
+    } else {
+      formHost.classList.remove('mobile-facets-portal-open');
+    }
+  };
+
+  const restorePortal = () => {
+    if (details.hasAttribute('open') || details.classList.contains('menu-opening')) return;
+
+    formHost.classList.remove('mobile-facets-portal-open');
+    if (placeholder.parentNode && formHost.parentElement === document.body) {
+      placeholder.parentNode.insertBefore(formHost, placeholder.nextSibling);
+    }
+  };
+
+  new MutationObserver(() => {
+    syncPortal();
+    if (!details.hasAttribute('open') && !details.classList.contains('menu-opening')) {
+      setTimeout(restorePortal, 450);
+    }
+  }).observe(details, { attributes: true, attributeFilter: ['open', 'class'] });
+
+  details.addEventListener('toggle', () => {
+    syncPortal();
+    if (!details.open) {
+      setTimeout(restorePortal, 450);
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobileFacetsPortal);
+} else {
+  initMobileFacetsPortal();
+}
