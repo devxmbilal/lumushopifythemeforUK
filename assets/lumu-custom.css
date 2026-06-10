@@ -1477,6 +1477,55 @@ html {
   overflow: hidden;
 }
 
+/* Lumu branding watermark on product images */
+.lumu-brand-watermark {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.72);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  line-height: 0;
+}
+
+.lumu-brand-watermark img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.lumu-brand-watermark--small img {
+  max-height: 16px;
+}
+
+.lumu-brand-watermark--large img {
+  max-height: 26px;
+}
+
+.product__media,
+.card__media,
+.lumu-cat-card__img-wrap {
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .lumu-brand-watermark--large {
+    top: 14px;
+    padding: 6px 14px;
+    border-radius: 10px;
+  }
+
+  .lumu-brand-watermark--large img {
+    max-height: 32px;
+  }
+}
+
 .lumu-pfp__card-img {
   position: absolute;
   top: 0;
