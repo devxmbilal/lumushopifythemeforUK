@@ -1511,11 +1511,21 @@ html {
   right: 12px;
   bottom: 12px;
   transform: none;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 14px;
   padding: 10px 16px;
   box-shadow: 0 6px 20px rgba(15, 23, 42, 0.14);
+}
+
+/* Prevent Dawn .media > * rule from stretching watermark over the image */
+.product-media-container > .lumu-brand-watermark--pdp {
+  position: absolute !important;
+  z-index: 4;
 }
 
 .lumu-brand-watermark--pdp .lumu-brand-watermark__label {
@@ -1528,7 +1538,6 @@ html {
   color: #8577C7;
 }
 
-.product__media,
 .card__media,
 .lumu-cat-card__img-wrap,
 .product-media-container {
