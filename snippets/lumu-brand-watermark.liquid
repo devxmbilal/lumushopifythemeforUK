@@ -2,15 +2,24 @@
   Lumu logo branding overlay for product images.
 
   Accepts:
-  - size: {String} 'small' for cards, 'large' for product page (optional)
+  - size: {String} 'small' for cards (optional)
+  - variant: {String} 'default' for cards/categories, 'pdp' for product detail badge (optional)
 {% endcomment %}
 {%- assign watermark_size = size | default: 'small' -%}
-<div class="lumu-brand-watermark lumu-brand-watermark--{{ watermark_size }}" aria-hidden="true">
-  <img
-    src="{{ 'lumulogo.png' | asset_img_url: '200x' }}"
-    alt=""
-    width="80"
-    height="35"
-    loading="lazy"
-  >
+{%- assign watermark_variant = variant | default: 'default' -%}
+<div
+  class="lumu-brand-watermark lumu-brand-watermark--{{ watermark_size }}{% if watermark_variant == 'pdp' %} lumu-brand-watermark--pdp{% endif %}"
+  aria-hidden="true"
+>
+  {%- if watermark_variant == 'pdp' -%}
+    <span class="lumu-brand-watermark__label">LUMU</span>
+  {%- else -%}
+    <img
+      src="{{ 'lumulogo.png' | asset_img_url: '200x' }}"
+      alt=""
+      width="80"
+      height="35"
+      loading="lazy"
+    >
+  {%- endif -%}
 </div>
