@@ -4958,6 +4958,94 @@ media-gallery .thumbnail img {
   }
 }
 
+/* ============================================
+   COLLECTIONS LIST PAGE — Fix & Premium Polish
+   ============================================ */
 
+/* 1. Fix Collection Card Image Layout Bug */
+.collection-card-wrapper .card--standard .card__inner .card__content {
+  display: none !important; /* Remove the empty content box inside the flex ratio container */
+}
 
+.collection-card-wrapper .card__media {
+  left: 0;
+  top: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
 
+/* 2. Premium Header Polish for Collections page */
+.template-list-collections .title--primary {
+  text-align: center;
+  font-size: clamp(2.8rem, 5vw, 4.2rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+  background: linear-gradient(135deg, #0f172a 0%, #6153a7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.template-list-collections .title--primary::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--lumu-purple), var(--lumu-purple-light));
+  border-radius: 2px;
+}
+
+/* 3. Sleek Premium Card Custom Styling */
+.collection-card-wrapper .card-wrapper {
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.collection-card-wrapper .card-wrapper:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 40px rgba(133, 119, 199, 0.15) !important;
+  border-color: rgba(133, 119, 199, 0.25) !important;
+}
+
+.collection-card-wrapper .card__inner {
+  border-radius: 16px 16px 0 0 !important;
+  background: #f8f7fc !important;
+}
+
+.collection-card-wrapper .card__content {
+  padding: 20px 24px 24px !important;
+  background: #ffffff;
+}
+
+.collection-card-wrapper .card__heading {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  transition: color 0.3s ease;
+}
+
+.collection-card-wrapper .card-wrapper:hover .card__heading {
+  color: var(--lumu-purple) !important;
+}
+
+.collection-card-wrapper .card__heading .icon-wrap {
+  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.collection-card-wrapper .card-wrapper:hover .card__heading .icon-wrap {
+  transform: translateX(4px);
+  color: var(--lumu-purple);
+}
