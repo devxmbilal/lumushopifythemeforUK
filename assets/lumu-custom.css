@@ -4963,8 +4963,8 @@ media-gallery .thumbnail img {
    ============================================ */
 
 /* 1. Fix Collection Card Image Layout Bug */
-.collection-card-wrapper .card--standard .card__inner .card__content {
-  display: none !important; /* Remove the empty content box inside the flex ratio container */
+.collection-card-wrapper .card--standard.card--media .card__inner .card__content {
+  display: none !important; /* Remove the empty content box inside the flex ratio container only when media is present */
 }
 
 .collection-card-wrapper .card__media {
